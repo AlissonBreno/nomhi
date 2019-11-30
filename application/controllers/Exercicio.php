@@ -38,19 +38,23 @@ class Exercicio extends CI_Controller {
 			redirect('Exercicio');	
 		}
 
-		$this->load->model('tipousuario_model');
+		//Pega os exercícios
+		$this->load->model('exercicio_model');
+		$query = $this->exercicio_model->getExercicioById($id);
 
-		$query = $this->tipousuario_model->getTipoUsuarioById($id);
+		//Pega os valores da tabela Hidrocarboneto
+		$this->load->model('hidrocarb_model');
+		$dadoss['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
 
 		if($query==NULL){
 			redirect('Exercicio');	
 		}
 
-		$dados['tipo_usuarios'] = $query;
+		$dados['exercicios'] = $query;
 
 
-		$this->load->view('includes/header');
-		$this->load->view('view/tipo_usuario', $dados);
+		$this->load->view('includes/header', $dadoss);
+		$this->load->view('view/exercicio', $dados);
 		$this->load->view('includes/footer');
 	
 	}
