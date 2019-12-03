@@ -26,8 +26,8 @@ class Exercicio extends CI_Controller {
 		$this->load->model('hidrocarb_model');
 		$dados['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
 
-		$this->load->view('includes/header');
-		$this->load->view('add/exercicio', $dados);
+		$this->load->view('includes/header', $dados);
+		$this->load->view('add/exercicio');
 		$this->load->view('includes/footer');
 	}
 

@@ -26,9 +26,30 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span></button>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="#"><span>Nom</span>Hidro</a>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a  data-toggle="dropdown" href="#">
+                            Hidrocarbonetos
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+
+                            <?php foreach ($hidrocarbonetos as $hidrocarboneto) { ?>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <div class="message-body">
+                                            <a href="<?=base_url()?>tipoHidro/carregarTipo/<?= $hidrocarboneto->Id_Hidro?>"><strong><?= $hidrocarboneto->Nom_Hidro?></strong></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- /.container-fluid -->
@@ -36,83 +57,86 @@
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name">Maria Eduarda</div>
-                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Criadora de Conteúdo</div>
+                <div class="profile-usertitle-name"><?php echo $this->session->userdata('nome'); ?>,</div>
+                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Você está Online</div>
             </div>
             <div class="clear"></div>
         </div>
         <div class="divider"></div>
         <ul class="nav menu">
-            <li><a href="<?=base_url()?>dashboard"><em class="fa fa-dashboard"></em> Dashboard</a></li>
-            <li class="parent ">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <em class="fa fa-navicon"></em> Grupos Químicos <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a class="" href="<?=base_url()?>tipoHidro">
-                            <span class="fa fa-table"></span> Hidrocarbonetos
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="<?=base_url()?>tipoHidro/cadastrar">
-                            <span class="fa fa-plus"></span> Cadastrar Novo
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="parent ">
-                <a data-toggle="collapse" href="#sub-item-2">
-                    <em class="fa fa-navicon"></em> Usuário <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-2">
-                    <li>
-                        <a class="" href="<?=base_url()?>Usuario">
-                            <span class="fa fa-table"></span> Usuários
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="<?=base_url()?>Usuario/cadastrar">
-                            <span class="fa fa-plus"></span> Cadastrar Novo
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="parent ">
-                <a data-toggle="collapse" href="#sub-item-3">
-                    <em class="fa fa-navicon"></em> Tipos de Usuário <span data-toggle="collapse" href="#sub-item-3" class="icon pull-right"><em class="fa fa-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-3">
-                    <li>
-                        <a class="" href="<?=base_url()?>tipoUsuario">
-                            <span class="fa fa-table"></span> Tipos de Usuários
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="<?=base_url()?>tipoUsuario/cadastrar">
-                            <span class="fa fa-plus"></span> Cadastrar Novo
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="parent ">
-                <a data-toggle="collapse" href="#sub-item-4">
-                    <em class="fa fa-navicon"></em> Exercício <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-4">
-                    <li>
-                        <a class="" href="<?=base_url()?>Exercicio">
-                            <span class="fa fa-table"></span> Exercícios
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="<?=base_url()?>Exercicio/cadastrar">
-                            <span class="fa fa-plus"></span> Cadastrar Novo
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="login.html"><em class="fa fa-power-off"></em> Logout</a></li>
+            <li><a href="<?=base_url()?>dashboard/inicio"><em class="fa fa-dashboard"></em> Dashboard</a></li>
+            <?php $tipo = $this->session->userdata('tipo');?>
+            <?php if($tipo == 1){ ?>
+                <li class="parent ">
+                    <a data-toggle="collapse" href="#sub-item-1">
+                        <em class="fa fa-navicon"></em> Grupos Químicos <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-1">
+                        <li>
+                            <a class="" href="<?=base_url()?>tipoHidro">
+                                <span class="fa fa-table"></span> Hidrocarbonetos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="<?=base_url()?>tipoHidro/cadastrar">
+                                <span class="fa fa-plus"></span> Cadastrar Novo
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent ">
+                    <a data-toggle="collapse" href="#sub-item-2">
+                        <em class="fa fa-navicon"></em> Usuário <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-2">
+                        <li>
+                            <a class="" href="<?=base_url()?>Usuario">
+                                <span class="fa fa-table"></span> Usuários
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="<?=base_url()?>Usuario/cadastrar">
+                                <span class="fa fa-plus"></span> Cadastrar Novo
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent ">
+                    <a data-toggle="collapse" href="#sub-item-3">
+                        <em class="fa fa-navicon"></em> Tipos de Usuário <span data-toggle="collapse" href="#sub-item-3" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-3">
+                        <li>
+                            <a class="" href="<?=base_url()?>tipoUsuario">
+                                <span class="fa fa-table"></span> Tipos de Usuários
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="<?=base_url()?>tipoUsuario/cadastrar">
+                                <span class="fa fa-plus"></span> Cadastrar Novo
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent ">
+                    <a data-toggle="collapse" href="#sub-item-4">
+                        <em class="fa fa-navicon"></em> Exercício <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-4">
+                        <li>
+                            <a class="" href="<?=base_url()?>Exercicio">
+                                <span class="fa fa-table"></span> Exercícios
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="<?=base_url()?>Exercicio/cadastrar">
+                                <span class="fa fa-plus"></span> Cadastrar Novo
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php } ?>
+            <li><a href="<?=base_url()?>dashboard/sair"><em class="fa fa-power-off"></em> Logout</a></li>
 
         </ul>
     </div>

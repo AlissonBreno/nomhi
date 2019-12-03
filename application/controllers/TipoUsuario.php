@@ -9,7 +9,11 @@ class TipoUsuario extends CI_Controller {
 
 		$dados['tipo_usuarios'] = $this->tipousuario_model->getTipoUsuario();
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('tipo_usuarios', $dados);
 		$this->load->view('includes/footer');
 	}
@@ -17,7 +21,11 @@ class TipoUsuario extends CI_Controller {
 	//carrega página de cadastro de novo Tipo de Usuário
 	public function cadastrar(){
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('add/tipo_usuario');
 		$this->load->view('includes/footer');
 	}
@@ -40,7 +48,11 @@ class TipoUsuario extends CI_Controller {
 		$dados['tipo_usuarios'] = $query;
 
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('view/tipo_usuario', $dados);
 		$this->load->view('includes/footer');
 	
@@ -65,7 +77,11 @@ class TipoUsuario extends CI_Controller {
 
 		$dados['tipo_usuarios'] = $query;
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('edit/tipo_usuario', $dados);
 		$this->load->view('includes/footer');
 

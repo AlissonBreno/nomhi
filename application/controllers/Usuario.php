@@ -12,7 +12,11 @@ class Usuario extends CI_Controller {
 		$this->load->model('tipousuario_model');
 		$dadoss['tipo_usuarios'] = $this->tipousuario_model->getTipoUsuario();
 
-		$this->load->view('includes/header', $dadoss);
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH + $dadoss);
 		$this->load->view('usuarios', $dados);
 		$this->load->view('includes/footer');
 	}
@@ -23,7 +27,11 @@ class Usuario extends CI_Controller {
 		$this->load->model('tipousuario_model');
 		$dados['tipo_usuarios'] = $this->tipousuario_model->getTipoUsuario();
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('add/usuario', $dados);
 		$this->load->view('includes/footer');
 	}
@@ -51,8 +59,11 @@ class Usuario extends CI_Controller {
 
 		$dados['usuarios'] = $query;
 
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
 
-		$this->load->view('includes/header', $dadosTu);
+		$this->load->view('includes/header', $dadosH + $dadosTu);
 		$this->load->view('view/usuario', $dados);
 		$this->load->view('includes/footer');
 	
@@ -82,7 +93,11 @@ class Usuario extends CI_Controller {
 
 		$dados['usuarios'] = $query;
 
-		$this->load->view('includes/header', $dadosTu);
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH + $dadosTu);
 		$this->load->view('edit/usuario', $dados);
 		$this->load->view('includes/footer');
 

@@ -5,19 +5,23 @@ class TipoHidro extends CI_Controller {
 
 	//carrega a lista de hidrocarbonetos
 	public function index(){
-		$this->load->model('hidrocarb_model');
 
+		$this->load->model('hidrocarb_model');
 		$dados['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
 
-		$this->load->view('includes/header');
-		$this->load->view('hidrocarbonetos', $dados);
+		$this->load->view('includes/header', $dados);
+		$this->load->view('hidrocarbonetos');
 		$this->load->view('includes/footer');
 	}
 
 	//carrega página de cadastro de novo hidrocarboneto
 	public function cadastrar(){
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dados['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dados);
 		$this->load->view('add/hidrocarboneto');
 		$this->load->view('includes/footer');
 	}
@@ -39,8 +43,11 @@ class TipoHidro extends CI_Controller {
 
 		$dados['hidrocarbonetos'] = $query;
 
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
 
-		$this->load->view('includes/header');
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('view/hidrocarboneto', $dados);
 		$this->load->view('includes/footer');
 	
@@ -65,7 +72,11 @@ class TipoHidro extends CI_Controller {
 
 		$dados['hidrocarbonetos'] = $query;
 
-		$this->load->view('includes/header');
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH);
 		$this->load->view('edit/hidrocarboneto', $dados);
 		$this->load->view('includes/footer');
 
@@ -116,6 +127,34 @@ class TipoHidro extends CI_Controller {
 
 	}
 
+	//carrega uma pagina de exercício para o usuário
+	//carrega página de visualização de um determinado registro
+	public function carregarTipo($id = NULL){
+			
+		if($id==NULL){
+			redirect('tipoHidro');	
+		}
 
+		$this->load->model('hidrocarb_model');
+
+		$query = $this->hidrocarb_model->getHidrocarbById($id);
+
+		if($query==NULL){
+			redirect('tipoHidro');	
+		}
+
+		$dados['hidrocarbonetos'] = $query;
+
+		$this->load->model('exercicio_model');
+		$dadosE['exercicios'] = $this->exercicio_model->getExercicio();
+
+		//carrega listinha no header
+		$this->load->model('hidrocarb_model');
+		$dadosH['hidrocarbonetos'] = $this->hidrocarb_model->getHidrocarb();
+
+		$this->load->view('includes/header', $dadosH + $dadosE);
+		$this->load->view('view/p_hidrocarboneto', $dados);
+		$this->load->view('includes/footer');
 	
+	}
 }
